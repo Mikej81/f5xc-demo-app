@@ -1,0 +1,37 @@
+body {
+    background: lightblue url("bg.jpg") no-repeat fixed center;
+    color: white;
+}
+
+h1 {
+    background-color: #1f7455;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    width: 75%;
+}
+
+.button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}

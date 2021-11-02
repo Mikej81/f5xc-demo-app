@@ -1,0 +1,18 @@
+doctype html
+
+html(lang='en')
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div.center
+   div.title 
+     h1= title
+   a.button(href='/login') Login
+   a.button(href='/headers') Request Headers 
+   a.button(href='/cookies') Cookies
+   a.button(href='/nodeinfo') Node Information
+   a.button(href='/status') Server Status
+
+   block content
+

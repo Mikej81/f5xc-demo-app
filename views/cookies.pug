@@ -1,0 +1,13 @@
+extends layout
+
+block content
+ h3 Cookies
+
+ pre 
+  code 
+   each val,key in data 
+    p= key + ': ' + val
+   else 
+    p No Cookies
+
+  include foot
