@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
         httpOnly: true,
         sameSite: 'lax'
     });
-    res.render('headers', { title: 'Demo Web Application', reqHeaders: req.headers, resHeaders: res.getHeaders() });
+    res.render('headers', { title: 'Demo Web Application', username: session.userid, reqHeaders: req.headers, resHeaders: res.getHeaders() });
 });
 
 module.exports = router;

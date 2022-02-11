@@ -8,11 +8,11 @@ html
     div.center
     div.title 
       h1= title
-      a.button(href='/headers') Request Headers 
-      a.button(href='/cookies') Cookies
-      a.button(href='/nodeinfo') Node Information
-      a.button(href='/status') Server Status
-      if username
+      if username 
+        a.button(href='/headers') Request Headers 
+        a.button(href='/cookies') Cookies
+        a.button(href='/nodeinfo') Node Information
+        a.button(href='/status') Server Status
         a.button(href='/qrcodes') QR Codes
     block content
 

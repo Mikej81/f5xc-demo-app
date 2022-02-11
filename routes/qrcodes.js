@@ -7,7 +7,7 @@ var QRCode = require('qrcode')
 router.get('/', function (req, res, next) {
   session = req.session;
   if (session.userid) {
-    res.render('qrcodes', { error: false });
+    res.render('qrcodes', { error: false, title: 'Demo Web Application', username: session.userid });
   }
   else {
     res.redirect('/');
@@ -21,11 +21,11 @@ router.post('/gen', function (req, res, next) {
 
   if (qrstring) {
     QRCode.toDataURL(qrstring, function (err, url) {
-      res.render('qrcodes', { qrcode: url });
+      res.render('qrcodes', { qrcode: url, title: 'Demo Web Application', username: session.userid });
     })
   }
   else {
-    res.render('qrcodes', { error: true });
+    res.render('qrcodes', { error: true, title: 'Demo Web Application', username: session.userid });
   }
 
 })

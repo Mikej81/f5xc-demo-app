@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
         res.redirect('/');
     }
     else {
-        res.render('index', { error: true });
+        res.render('index', { error: true, title: 'Demo Web Application', username: session.userid });
     }
 });
 

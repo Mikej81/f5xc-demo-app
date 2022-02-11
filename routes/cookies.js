@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
         httpOnly: true,
         sameSite: 'lax'
     });
-    res.render('cookies', { title: 'Demo Web Application', data: req.cookies });
+    res.render('cookies', { title: 'Demo Web Application', data: req.cookies, username: session.userid });
 });
 
 module.exports = router;

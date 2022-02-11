@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
         httpOnly: true,
         sameSite: 'lax'
     });
-    res.render('nodeinfo', { title: 'Demo Web Application', data: getinfo() });
+    res.render('nodeinfo', { title: 'Demo Web Application', username: session.userid, data: getinfo() });
 });
 
 module.exports = router;

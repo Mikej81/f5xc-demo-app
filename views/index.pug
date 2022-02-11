@@ -10,9 +10,6 @@ block content
                 if error
                     p.text-danger Error!!!
 
-            - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
-            h1(class=h1Classes) Please sign in
-
             //-input email
             label( for="inputEmail" class="sr-only") Email address
             input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
@@ -32,5 +29,4 @@ block content
             - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
             button(class=buttonClass type="submit") Sign in
 
-            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-            p(class=pClasses) &copy; 2022-2023
+    include foot
