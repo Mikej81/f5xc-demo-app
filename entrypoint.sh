@@ -6,3 +6,4 @@ tsagent setup --deploy-key=$PSK --ruleset="Base Rule Set,Docker Rule Set" && \
 cd $DEMO_HOME
 
 npm start
+#DEBUG=myapp:* npm start

@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 var logger = require('morgan');
 var crypto = require('crypto');
 
@@ -17,7 +18,12 @@ var headersRouter = require('./routes/headers');
 var cookiesRouter = require('./routes/cookies');
 var nodeRouter = require('./routes/nodeinfo');
 var loginRouter = require('./routes/login');
+var userLogin = require('./routes/users');
 var userapiRouter = require('./users/users.controller');
+var qrRouter = require('./routes/qrcodes');
+
+const oneDay = 1000 * 60 * 60 * 24;
+
 
 var app = express();
 
@@ -48,6 +54,15 @@ app.use(require('express-status-monitor')());
 // use JWT auth to secure the api
 //app.use(jwt());
 
+app.use(sessions({
+  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+  saveUninitialized: true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}));
+
+var session;
+
 // cookie set up
 app.use(function (req, res, next) {
   // check if client sent cookie
@@ -70,7 +85,9 @@ app.use('/headers', headersRouter);
 app.use('/cookies', cookiesRouter);
 app.use('/nodeinfo', nodeRouter);
 app.use('/login', loginRouter);
-app.use('/users', userapiRouter);
+app.use('/qrcodes', qrRouter);
+app.use('/users', userLogin);
+app.use('/users/users.controller', userapiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

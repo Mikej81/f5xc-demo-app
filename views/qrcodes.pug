@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    div.text-center
+        if qrcode
+            img(alt='qrcode', src=qrcode)
+
+        form(class="form-codegen" method="POST" action="/qrcodes/gen")
+            #error
+                if error
+                    p.text-danger Error!!!
+
+            - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
+            h1(class=h1Classes) Enter Text to Encode
+
+            //-input email
+            label( for="inputText" class="sr-only") URL
+            input(type="text" name="inputUrl" id="inputUrl" class="form-control" placeholder="https://domain.com/" required autofocus)
+
+
+            //-encode button
+            - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+            button(class=buttonClass type="submit") encode
+
+            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
+            p(class=pClasses) &copy; 2022-2023

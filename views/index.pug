@@ -1,10 +1,36 @@
 extends layout
 
 block content
- pre 
-  code 
-   p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper eleifend consectetur. Etiam ullamcorper dui ornare elit commodo ultrices. Praesent ultrices egestas lorem, et varius augue. Quisque nec sem sapien. Quisque tincidunt ornare lectus in maximus. In a tristique diam. Mauris sodales cursus eleifend. Mauris tempus scelerisque efficitur.
+    div.text-center
+        if username 
+            h2 Welcome #{username}
+        else
+          form(class="form-signin" method="POST" action="/users/login")
+            #error
+                if error
+                    p.text-danger Error!!!
 
-   p Fusce vehicula purus at dui eleifend consectetur. Nunc sagittis nunc sit amet elit molestie maximus. Aliquam eget ante a ligula malesuada pretium a a velit. Maecenas vel metus sagittis, tincidunt odio et, sagittis libero. Sed accumsan tortor ac aliquam porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque facilisis lobortis sem dictum tristique. Fusce vulputate semper ullamcorper. Aliquam metus ante, commodo quis sagittis id, tempor vestibulum lacus. Pellentesque blandit, massa nec volutpat suscipit, elit tellus consequat libero, non blandit augue lacus eu tortor.
+            - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
+            h1(class=h1Classes) Please sign in
 
- include foot
+            //-input email
+            label( for="inputEmail" class="sr-only") Email address
+            input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
+
+            //-input password
+            label(for="inputPassword" class="sr-only") Password
+            input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
+
+            //-remember Checkbox
+            - var divClasses=['checkbox', 'mb-3'];
+            div(class=divClasses)
+                label
+                    input(type="checkbox" value="remember-me")
+                    span Remember me
+
+            //-signIn button
+            - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+            button(class=buttonClass type="submit") Sign in
+
+            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
+            p(class=pClasses) &copy; 2022-2023

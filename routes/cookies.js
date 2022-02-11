@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 
 /* GET headers page. */
 router.get('/', function (req, res, next) {
+    session = req.session;
     res.cookie('DemoCookie', 'OopEepOrpAhAh', {
         maxAge: 3600,
         secure: true,

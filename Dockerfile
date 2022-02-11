@@ -8,16 +8,17 @@ ENV DEMO_GROUP=nodegroup \
 
 WORKDIR ${DEMO_HOME}
 
-RUN apt-get clean && apt-get update
+RUN apt-get clean && apt-get update && \
+    apt-get install gnupg curl -y && \
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo deb https://deb.nodesource.com/node_12.x bionic main > /etc/apt/sources.list.d/nodesource.list
 
-RUN apt-get -y install \
-    curl \
+RUN apt-get update && apt-get -y install \
     gnupg \
     ca-certificates \
     apt-transport-https \
     iptables \ 
     sudo \
-    npm \
     build-essential \
     nano \
     wget \
@@ -37,17 +38,21 @@ RUN echo 'deb https://pkg.threatstack.com/v2/Ubuntu bionic main' >> /etc/apt/sou
 
 RUN useradd -d ${DEMO_HOME} -s /bin/bash -m ${DEMO_USER} -g users
 RUN chown -R ${DEMO_USER} ${DEMO_HOME}
+COPY entrypoint.sh ${DEMO_HOME}/entrypoint.sh
+RUN chown -R ${DEMO_USER} ./entrypoint.sh 
 
-USER ${DEMO_USER}
-
-COPY package*.json ${DEMO_HOME} 
-COPY entrypoint.sh ./entrypoint.sh
+#COPY package*.json ${DEMO_HOME} 
+#COPY entrypoint.sh ./entrypoint.sh
 COPY . ${DEMO_HOME}/
 
-RUN npm install && \
-    npm cache clean --force
+RUN cd ${DEMO_HOME} && \
+    npm install && \
+    npm cache clean --force && \
+    npm update
 
-#RUN chmod +x ./entrypoint.sh
+RUN chmod +x ${DEMO_HOME}/entrypoint.sh
+
+USER ${DEMO_USER}
 
 EXPOSE 3000
 

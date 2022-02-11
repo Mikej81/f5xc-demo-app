@@ -1,15 +1,15 @@
-a {
-  color: #00B7FF;
-}
+html,
 body {
   background: lightblue url("../images/bg.jpg") no-repeat fixed center;
   color: white;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+a {
+  color: #00B7FF;
+}
 h1 {
-  background-color: #1f7455;
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 20px;
@@ -23,7 +23,7 @@ h1 {
 }
 h3 {
   font-family: helvetica;
-  background-color: #1f7455;
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 20px;
@@ -37,7 +37,8 @@ h3 {
 }
 
 .button {
-  background-color: #04AA6D;
+  background-color: #007bff;
+  border-color:#007bff;
   border: none;
   color: white;
   padding: 20px;
@@ -52,7 +53,7 @@ a.button {
   -webkit-appearance: button;
   -moz-appearance: button;
   appearance: button;
-  background-color: #04AA6D;
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 10px;
@@ -100,6 +101,13 @@ pre code {
 .container {
   width: 90%;
   margin: 0 auto;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
 }
 
 .form-signin {
