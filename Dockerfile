@@ -2,6 +2,11 @@ FROM ubuntu:bionic
 
 LABEL maintainer="Michael Coleman Michael@f5.com"
 
+LABEL f5.xcs.demo.version="0.0.1-beta"
+LABEL f5.xcs.demo.release-date="2022-3-11"
+LABEL f5.xcs.demo.git="https://github.com/Mikej81/f5xc-demo-app.git"
+LABEL f5.xcs.demo.git.repo="https://github.com/Mikej81/f5xc-demo-app"
+
 ENV DEMO_GROUP=nodegroup \
     DEMO_USER=nodeuser \
     DEMO_HOME=/nodeuser \
