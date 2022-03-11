@@ -18,17 +18,13 @@ RUN apt-get clean && apt-get update && apt-get upgrade && \
     curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && apt-get install -y \
-    threatstack-agent-support \
     rpm \
-    threatstack-agent \
     ca-certificates \
     apt-transport-https \
     iptables \ 
     sudo \
     build-essential \
-    libsystemd-dev \
     nano \
-    systemd \
     python3.8 \ 
     python3-pip \
     libcairo2-dev \
