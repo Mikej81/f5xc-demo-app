@@ -21,6 +21,7 @@ var loginRouter = require('./routes/login');
 var userLogin = require('./routes/users');
 var userapiRouter = require('./users/users.controller');
 var qrRouter = require('./routes/qrcodes');
+var appAttack = require('./routes/attack');
 
 const oneDay = 1000 * 60 * 60 * 24;
 
@@ -87,6 +88,7 @@ app.use('/nodeinfo', nodeRouter);
 app.use('/login', loginRouter);
 app.use('/qrcodes', qrRouter);
 app.use('/users', userLogin);
+app.use('/attack', appAttack);
 app.use('/users/users.controller', userapiRouter);
 
 // catch 404 and forward to error handler

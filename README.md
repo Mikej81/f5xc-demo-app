@@ -21,3 +21,6 @@ For ThreatStack integration you will need a deployKey from [ThreatStack](https:/
 ```bash
 docker run --rm -d -p 3000:3000/tcp mcoleman81/voltdemoapp:latest --env PSK=[DeployKey from ThreatStack Account]
 ```
+
+latest for standard app
+agility for threatstack integrated app
