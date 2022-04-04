@@ -14,15 +14,15 @@ ENV DEMO_GROUP=nodegroup \
 
 WORKDIR ${DEMO_HOME}
 
-RUN apt-get clean && apt-get update && apt-get upgrade && \
-    apt-get install -y \
+RUN apt-get clean && apt-get -y update && apt-get -y upgrade && \
+    apt-get install --no-install-recommends -y \
     apt-utils \
     software-properties-common \
     gnupg \
     curl && \
     curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get update && apt-get install -y \
+    apt-get -y update && apt-get install --no-install-recommends -y \
     rpm \
     ca-certificates \
     apt-transport-https \
@@ -35,6 +35,7 @@ RUN apt-get clean && apt-get update && apt-get upgrade && \
     libcairo2-dev \
     libdbus-glib-1-dev \
     libgirepository1.0-dev \
+    zlib1g-dev \
     pkg-config \
     nodejs && \
     rm -rf /var/lib/apt/lists/*
@@ -47,9 +48,10 @@ RUN chown -R ${DEMO_USER} ./entrypoint.sh
 
 COPY . ${DEMO_HOME}/
 
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
 
 RUN cd ${DEMO_HOME} && \
+    npm install -g npm@8.6.0 && \
     npm install && \
     npm cache clean --force && \
     npm update
