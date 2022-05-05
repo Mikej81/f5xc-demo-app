@@ -8,8 +8,11 @@ const dotenv = require('dotenv');
 dotenv.config(process.cwd(), '../.env');
 
 // access config var
-process.env.TOKEN_SECRET;
-
+if (!process.env.SHARED_TOKEN) {
+    let encToken = process.env.TOKEN_SECRET;
+} else {
+    let encToken = process.env.SHARED_TOKEN
+}
 
 /* GET headers page. */
 router.get('/', function (req, res, next) {
@@ -24,7 +27,8 @@ router.post('/', function (req, res, next) {
 });
 
 function generateAccessToken(username) {
-    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+    //return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+    return jwt.sign(username, encToken, { expiresIn: '1800s' });
 }
 
 module.exports = router;
