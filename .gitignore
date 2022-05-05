@@ -119,3 +119,5 @@ dist
 
 #Block Package-Lock
 package-lock.json
+
+**/views/foot.pug
