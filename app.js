@@ -6,6 +6,9 @@ const sessions = require('express-session');
 var logger = require('morgan');
 var crypto = require('crypto');
 
+const https = require('https');
+var shell = require('shelljs');
+
 const fs = require('fs')
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -22,9 +25,25 @@ var userLogin = require('./routes/users');
 var userapiRouter = require('./users/users.controller');
 var qrRouter = require('./routes/qrcodes');
 var appAttack = require('./routes/attack');
+const { plugin } = require('mongoose');
 
 const oneDay = 1000 * 60 * 60 * 24;
 
+publicIP = function (str, callback) {
+  //console.log("Downloading from " + str);
+  https.get(str, function (res) {
+    var data = [];
+    //console.log("Got response: " + res.statusCode);
+    res.on('data', function (chunk) {
+      data.push(chunk);
+    });
+    res.on('end', function () {
+      callback(data.join(''));
+    });
+  }).on('error', function (e) {
+    console.log("Got error: " + e.message);
+  });
+};
 
 var app = express();
 
@@ -36,6 +55,21 @@ if (!fs.existsSync(__dirname + '/.env')) {
     console.log('[could not write secret to .env]');
   }
 }
+
+var myPublicIP = publicIP("https://icanhazip.com", function (report) {
+  //console.log(report);
+  myIPGeo = publicIP("https://api.iplocation.net/?ip=" + report, function (geoinfo) {
+    //console.log(geoinfo);
+    cleanGeoInfo = geoinfo.replace(',"response_code":"200","response_message":"OK"', '')
+    const geopug = "footer#footer\r\n  div.footer\r\n    pre\r\n      code Server Details " + cleanGeoInfo;
+    try {
+      const data = fs.writeFileSync(__dirname + '/views/foot.pug', geopug)
+    } catch (err) {
+      console.log('[could not write content to footer.pug]');
+    }
+  })
+})
+
 
 dotenv.config();
 process.env.TOKEN_SECRET;
