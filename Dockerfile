@@ -51,7 +51,7 @@ COPY . ${DEMO_HOME}/
 #RUN pip3 install -r requirements.txt
 
 RUN cd ${DEMO_HOME} && \
-    npm install -g npm@8.9.0 && \
+    npm install -g npm@8.12.1 && \
     npm install && \
     npm cache clean --force && \
     npm update

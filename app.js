@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 const sessions = require('express-session');
 var logger = require('morgan');
@@ -85,6 +86,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-status-monitor')());
+
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // use JWT auth to secure the api
 //app.use(jwt());
