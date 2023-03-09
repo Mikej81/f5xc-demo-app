@@ -25,6 +25,7 @@ var loginRouter = require('./routes/login');
 var userLogin = require('./routes/users');
 var userapiRouter = require('./users/users.controller');
 var qrRouter = require('./routes/qrcodes');
+var uploadRouter = require('./routes/upload');
 var appAttack = require('./routes/attack');
 const { plugin } = require('mongoose');
 
@@ -125,6 +126,7 @@ app.use('/nodeinfo', nodeRouter);
 app.use('/login', loginRouter);
 app.use('/qrcodes', qrRouter);
 app.use('/users', userLogin);
+app.use('/upload', uploadRouter);
 app.use('/attack', appAttack);
 app.use('/users/users.controller', userapiRouter);
 
