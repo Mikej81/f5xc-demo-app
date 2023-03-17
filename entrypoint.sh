@@ -2,5 +2,6 @@
 
 cd $DEMO_HOME
 
-npm start
+yarn run start
+#npm start
 #DEBUG=myapp:* npm start

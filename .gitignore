@@ -121,5 +121,6 @@ dist
 
 #Block Package-Lock
 package-lock.json
+yarn.lock
 
 **/views/foot.pug

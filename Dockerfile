@@ -10,9 +10,19 @@ LABEL f5.xcs.demo.git.repo="https://github.com/Mikej81/f5xc-demo-app"
 ENV DEMO_GROUP=nodegroup \
     DEMO_USER=nodeuser \
     DEMO_HOME=/nodeuser \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive 
 
 WORKDIR ${DEMO_HOME}
+
+RUN useradd -d ${DEMO_HOME} -s /bin/bash -m ${DEMO_USER} -g users && \
+    chown -R ${DEMO_USER} ${DEMO_HOME} && \
+    mkdir ${DEMO_HOME}/yarn_cache && \
+    mkdir ${DEMO_HOME}/yarn_global
+
+COPY . ${DEMO_HOME}/
+COPY entrypoint.sh ${DEMO_HOME}/entrypoint.sh
+
+ENV YARN_CACHE_FOLDER=${DEMO_HOME}/yarn_cache\ yarn\ --production
 
 RUN apt-get clean && apt-get -y update && apt-get -y upgrade && \
     apt-get install --no-install-recommends -y \
@@ -36,28 +46,19 @@ RUN apt-get clean && apt-get -y update && apt-get -y upgrade && \
     libdbus-glib-1-dev \
     libgirepository1.0-dev \
     zlib1g-dev \
-    pkg-config \
+    pkg-config \ 
     nodejs && \
-    rm -rf /var/lib/apt/lists/*
+    npm install -g npm@9.6.2 && \
+    npm install -g yarn && \
+    yarn cache clean --force && \
+    mkdir ${DEMO_HOME}/.npm-global && \
+    rm -rf /var/lib/apt/lists/* && \
+    cd ${DEMO_HOME} && \
+    chown -R ${DEMO_USER} . && \
+    yarn
 
-RUN useradd -d ${DEMO_HOME} -s /bin/bash -m ${DEMO_USER} -g users && \
-    chown -R ${DEMO_USER} ${DEMO_HOME}
-
-COPY entrypoint.sh ${DEMO_HOME}/entrypoint.sh
-RUN chown -R ${DEMO_USER} ./entrypoint.sh 
-
-COPY . ${DEMO_HOME}/
-
-#RUN pip3 install -r requirements.txt
-
-RUN cd ${DEMO_HOME} && \
-    npm install -g npm@9.6.1 && \
-    npm install && \
-    npm cache clean --force && \
-    npm update
-
-RUN chmod +x ${DEMO_HOME}/entrypoint.sh
-RUN chown -R ${DEMO_USER} .
+RUN chown -R ${DEMO_USER} ./entrypoint.sh && \
+    chmod +x ${DEMO_HOME}/entrypoint.sh
 
 USER ${DEMO_USER}
 
